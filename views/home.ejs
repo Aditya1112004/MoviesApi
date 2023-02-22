@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
+    <title>API handling</title>
+  </head>
+  <body>
+    <%movies.forEach(movie => { %>
+
+    <div class="card">
+      <img src="<%=movie.poster %>" />
+      <div class="container">
+        <h4><b><%=movie.title%></b></h4>
+        <p>Rated:<%=movie.rated %></p>
+        <p>Genre:<%=movie.genre %></p>
+        <p>Released:<%=movie.released %></p>
+      </div>
+    </div>
+
+    <%})%>
+  </body>
+</html>
