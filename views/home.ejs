@@ -1,13 +1,27 @@
 <html>
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" />
     <title>API handling</title>
   </head>
   <body>
-    <%movies.forEach(movie => { %>
+    
+    <form method='post' action="home">
+        <div class=" form">
+            <div class="right-pane">
+                <input type="text" id="movieSearch"  name="movieSearch" placeholder="Search Movie Name"/>
+            </div>
+        </div>
+        <div class="submit-name">
+            <input type="submit" value="Search" class="searchBtn"/>
+        </div>
+        </div>
+      </form>
 
+    <div class="cards">
+    <%movies.forEach(movie => { %>
     <div class="card">
-      <img src="<%=movie.poster %>" />
+      <img src="<%=movie.poster %>" alt="Poster" />
       <div class="container">
         <h4><b><%=movie.title%></b></h4>
         <p>Rated:<%=movie.rated %></p>
@@ -15,7 +29,7 @@
         <p>Released:<%=movie.released %></p>
       </div>
     </div>
-
     <%})%>
+  </div>
   </body>
 </html>
