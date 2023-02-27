@@ -3,6 +3,8 @@ const https = require("https");
 const url = "https://hexanovate-1oc3v5uf6-thephenom1708.vercel.app/api/movies";
 
 var movies = [];
+
+//==========Get all movies==============
 const request = https.request(url, (response) => {
   let data = "";
   response.on("data", (chunk) => {
@@ -13,9 +15,14 @@ const request = https.request(url, (response) => {
     const body = JSON.parse(data);
     for (var i in body) movies.push(body[i]);
     // console.log(res);
-    // for (var j = 0; j < res.length; j++) {
-    //   console.log(res[j].title, res[j].genre, res[j].rated, res[j].released);
-    //   console.log("=================================");
+    // for (var j = 0; j < movies.length; j++) {
+    //   console.log(
+    //     movies[j].title,
+    //     movies[j].genre,
+    //     movies[j].rated,
+    //     movies[j].released
+    //   );
+    //   console.log("-----");
     // }
   });
 });
@@ -38,9 +45,33 @@ app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//home
+//=========================================Routing=======================================
+let MovieSearched = [];
+
+//home get
 app.get("/", (req, res) => {
   res.render("home", { movies: movies });
+});
+
+//home post
+app.post("/home", (req, res) => {
+  let movieName = req.body.movieSearch;
+
+  MovieSearched = movies.filter(function (movie) {
+    return (
+      movie.title == movieName ||
+      movie.rated == movieName ||
+      movie.released == movieName ||
+      movie.genre == movieName
+    );
+  });
+  console.log(MovieSearched);
+  res.redirect("SearchedMovie");
+});
+
+//movieSearched
+app.get("/SearchedMovie", (req, res) => {
+  res.render("SearchedMovie", { MovieSearched: MovieSearched });
 });
 
 app.listen(PORT, () => {
