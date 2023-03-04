@@ -54,15 +54,22 @@ app.get("/", (req, res) => {
 });
 
 //home post
+
 app.post("/home", (req, res) => {
   let movieName = req.body.movieSearch;
-
+  //=========================================
+  let words = movieName.split(" ");
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+  }
+  //=========================================
   MovieSearched = movies.filter(function (movie) {
     return (
-      movie.title == movieName ||
-      movie.rated == movieName ||
-      movie.released == movieName ||
-      movie.genre == movieName
+      movie.title == words ||
+      movies.title == movieName ||
+      movie.rated == words ||
+      movie.released == words ||
+      movie.genre == words
     );
   });
   console.log(MovieSearched);
